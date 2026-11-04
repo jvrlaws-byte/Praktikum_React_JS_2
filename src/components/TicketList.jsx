@@ -19,9 +19,11 @@ function TicketList() {
   ];
 
   const filteredTickets = tickets.filter((ticket) => {
-    const matchSearch = ticket.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const keyword = search.trim().toLowerCase();
+
+    const matchSearch =
+      ticket.title.toLowerCase().includes(keyword) ||
+      ticket.name.toLowerCase().includes(keyword);
 
     const matchCategory =
       categoryFilter === "" ||
@@ -91,11 +93,14 @@ function TicketList() {
 
       <div className="card-body">
         <div className="row g-2 mb-3">
+          <p className="text-muted small mb-2">
+            Menampilkan {filteredTickets.length} dari {tickets.length} ticket
+          </p>
           <div className="col-md-5">
             <input
               type="text"
               className="form-control"
-              placeholder="Cari berdasarkan judul..."
+              placeholder="Cari judul atau nama pelapor..."
               value={search}
               onChange={(event) =>
                 setSearch(event.target.value)
