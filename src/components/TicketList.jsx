@@ -187,6 +187,9 @@ function TicketList() {
                       <div className="small text-muted">
                         {ticket.description}
                       </div>
+                      <div className="small text-muted">
+                        Lokasi: {ticket.location}
+                      </div>
                     </td>
 
                     <td>

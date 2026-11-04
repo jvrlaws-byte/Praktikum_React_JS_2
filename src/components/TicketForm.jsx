@@ -11,6 +11,7 @@ function TicketForm() {
     email: "",
     category: "",
     priority: "",
+    location: "",
     title: "",
     description: "",
     incidentDate: "",
@@ -27,6 +28,7 @@ function TicketForm() {
   const emailRef = useRef(null);
   const categoryRef = useRef(null);
   const priorityRef = useRef(null);
+  const locationRef = useRef(null);
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
   const dateRef = useRef(null);
@@ -80,6 +82,12 @@ function TicketForm() {
       case "priority":
         if (!value) {
           message = "Prioritas harus dipilih.";
+        }
+        break;
+
+      case "location":
+        if (!value) {
+          message = "Lokasi kejadian harus dipilih.";
         }
         break;
 
@@ -152,6 +160,10 @@ function TicketForm() {
       validationErrors.priority = "Prioritas harus dipilih.";
     }
 
+    if (!formData.location) {
+      validationErrors.location = "Lokasi kejadian harus dipilih.";
+    }
+
     if (!formData.title.trim()) {
       validationErrors.title = "Judul masalah harus diisi.";
     } else if (formData.title.trim().length < 10) {
@@ -162,7 +174,7 @@ function TicketForm() {
       validationErrors.description = "Deskripsi masalah harus diisi.";
     } else if (formData.description.trim().length < 20) {
       validationErrors.description =
-      "Deskripsi masalah minimal 20 karakter.";
+        "Deskripsi masalah minimal 20 karakter.";
     }
 
     if (!formData.incidentDate) {
@@ -196,6 +208,8 @@ function TicketForm() {
       categoryRef.current.focus();
     } else if (validationErrors.priority) {
       priorityRef.current.focus();
+    } else if (validationErrors.location) {
+      locationRef.current.focus();
     } else if (validationErrors.title) {
       titleRef.current.focus();
     } else if (validationErrors.description) {
@@ -243,6 +257,7 @@ function TicketForm() {
       email: "",
       category: "",
       priority: "",
+      location: "",
       title: "",
       description: "",
       incidentDate: "",
@@ -261,6 +276,7 @@ function TicketForm() {
       email: "",
       category: "",
       priority: "",
+      location: "",
       title: "",
       description: "",
       incidentDate: "",
@@ -370,6 +386,29 @@ function TicketForm() {
             </select>
             {errors.priority && (
               <div className="invalid-feedback">{errors.priority}</div>
+            )}
+          </div>
+
+          {/* LOCATION */}
+          <div className="mb-3">
+            <label className="form-label">Lokasi Kejadian</label>
+            <select
+              ref={locationRef}
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className={`form-select ${
+                errors.location ? "is-invalid" : ""
+              }`}
+            >
+              <option value="">-- Pilih Lokasi --</option>
+              <option value="Laboratorium">Laboratorium</option>
+              <option value="Ruang Kelas">Ruang Kelas</option>
+              <option value="Ruang Dosen">Ruang Dosen</option>
+              <option value="Area Umum">Area Umum</option>
+            </select>
+            {errors.location && (
+              <div className="invalid-feedback">{errors.location}</div>
             )}
           </div>
 
