@@ -5,6 +5,7 @@ function TicketList() {
   const {
     tickets,
     updateTicketStatus,
+    deleteTicket,
     clearTickets,
   } = useTicket();
 
@@ -255,26 +256,36 @@ function TicketList() {
                     </td>
 
                     <td>
-                      <select
-                        className="form-select form-select-sm"
-                        value={ticket.status}
-                        onChange={(event) =>
-                          updateTicketStatus(
-                            ticket.id,
-                            event.target.value
-                          )
-                        }
-                      >
-                        <option value="Open">
-                          Open
-                        </option>
-                        <option value="In Progress">
-                          In Progress
-                        </option>
-                        <option value="Resolved">
-                          Resolved
-                        </option>
-                      </select>
+                      <div className="d-flex gap-2">
+                        <select
+                          className="form-select form-select-sm"
+                          value={ticket.status}
+                          onChange={(event) =>
+                            updateTicketStatus(
+                              ticket.id,
+                              event.target.value
+                            )
+                          }
+                        >
+                          <option value="Open">
+                            Open
+                          </option>
+                          <option value="In Progress">
+                            In Progress
+                          </option>
+                          <option value="Resolved">
+                            Resolved
+                          </option>
+                        </select>
+
+                        <button
+                          type="button"
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => deleteTicket(ticket.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}
