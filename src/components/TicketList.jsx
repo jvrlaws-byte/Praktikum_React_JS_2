@@ -11,6 +11,7 @@ function TicketList() {
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+  const [priorityFilter, setPriorityFilter] = useState("");
 
   const categories = [
     ...new Set(
@@ -33,10 +34,15 @@ function TicketList() {
       statusFilter === "" ||
       ticket.status === statusFilter;
 
+    const matchPriority =
+      priorityFilter === "" ||
+      ticket.priority === priorityFilter;
+
     return (
       matchSearch &&
       matchCategory &&
-      matchStatus
+      matchStatus &&
+      matchPriority
     );
   });
 
@@ -96,7 +102,7 @@ function TicketList() {
           <p className="text-muted small mb-2">
             Menampilkan {filteredTickets.length} dari {tickets.length} ticket
           </p>
-          <div className="col-md-5">
+          <div className="col-12">
             <input
               type="text"
               className="form-control"
@@ -131,7 +137,23 @@ function TicketList() {
             </select>
           </div>
 
-          <div className="col-md-3">
+          <div className="col-md-4">
+            <select
+              className="form-select"
+              value={priorityFilter}
+              onChange={(event) =>
+                setPriorityFilter(event.target.value)
+              }
+            >
+              <option value="">Semua Prioritas</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+              <option value="Critical">Critical</option>
+            </select>
+          </div>
+
+          <div className="col-md-4">
             <select
               className="form-select"
               value={statusFilter}
