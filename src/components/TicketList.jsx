@@ -40,6 +40,9 @@ function TicketList() {
 
   const priorityBadge = (priority) => {
     switch (priority) {
+      case "Critical":
+        return "bg-dark";
+
       case "High":
         return "bg-danger";
 

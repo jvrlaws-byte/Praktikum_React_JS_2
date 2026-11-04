@@ -383,6 +383,7 @@ function TicketForm() {
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
+              <option value="Critical">Critical</option>
             </select>
             {errors.priority && (
               <div className="invalid-feedback">{errors.priority}</div>
