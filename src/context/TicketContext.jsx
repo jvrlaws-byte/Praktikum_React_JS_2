@@ -28,14 +28,21 @@ export function TicketProvider({ children }) {
   // Mengubah status ticket
   const updateTicketStatus = (id, status) => {
     setTickets((previousTickets) =>
-      previousTickets.map((ticket) =>
-        ticket.id === id
-          ? {
-              ...ticket,
-              status,
-            }
-          : ticket
-      )
+      previousTickets.map((ticket) => {
+        if (ticket.id !== id) {
+          return ticket;
+        }
+
+        // Ticket Resolved tidak boleh diubah lagi
+        if (ticket.status === "Resolved") {
+          return ticket;
+        }
+
+        return {
+          ...ticket,
+          status,
+        };
+      })
     );
   };
 

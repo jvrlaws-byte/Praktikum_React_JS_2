@@ -260,6 +260,7 @@ function TicketList() {
                         <select
                           className="form-select form-select-sm"
                           value={ticket.status}
+                          disabled={ticket.status === "Resolved"}
                           onChange={(event) =>
                             updateTicketStatus(
                               ticket.id,
@@ -267,12 +268,16 @@ function TicketList() {
                             )
                           }
                         >
-                          <option value="Open">
-                            Open
-                          </option>
-                          <option value="In Progress">
-                            In Progress
-                          </option>
+                          {ticket.status !== "Resolved" && (
+                            <>
+                              <option value="Open">
+                                Open
+                              </option>
+                              <option value="In Progress">
+                                In Progress
+                              </option>
+                            </>
+                          )}
                           <option value="Resolved">
                             Resolved
                           </option>
